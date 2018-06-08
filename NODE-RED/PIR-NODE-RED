@@ -1,0 +1,107 @@
+[
+    {
+        "id": "d04b4b4b.109d78",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b32133e1.0a25f",
+        "type": "rpi-gpio in",
+        "z": "d04b4b4b.109d78",
+        "name": "PIR",
+        "pin": "11",
+        "intype": "tri",
+        "debounce": "25",
+        "read": false,
+        "x": 229.99999237060547,
+        "y": 233.33331680297852,
+        "wires": [
+            [
+                "724afbbf.e21244"
+            ]
+        ]
+    },
+    {
+        "id": "16356d69.002c03",
+        "type": "firebase modify",
+        "z": "d04b4b4b.109d78",
+        "name": "FIREBASE",
+        "firebaseconfig": "",
+        "childpath": "data2",
+        "method": "push",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 999.9999694824219,
+        "y": 417.6666383743286,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d0e8b962.020168",
+        "type": "debug",
+        "z": "d04b4b4b.109d78",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1002.9999847412109,
+        "y": 209.99999141693115,
+        "wires": []
+    },
+    {
+        "id": "cd96001a.ba702",
+        "type": "function",
+        "z": "d04b4b4b.109d78",
+        "name": "",
+        "func": "m=msg.payload\nif (m==1)\n    {\n        return {payload:\"Person is detected\"}\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 585.9999446868896,
+        "y": 282.66666412353516,
+        "wires": [
+            [
+                "d0e8b962.020168",
+                "16356d69.002c03",
+                "aaacc357.af599"
+            ]
+        ]
+    },
+    {
+        "id": "aaacc357.af599",
+        "type": "play audio",
+        "z": "d04b4b4b.109d78",
+        "name": "",
+        "voice": "4",
+        "x": 988.3333358764646,
+        "y": 301.6666650772094,
+        "wires": []
+    },
+    {
+        "id": "724afbbf.e21244",
+        "type": "delay",
+        "z": "d04b4b4b.109d78",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 414.9999694824219,
+        "y": 213.3333282470703,
+        "wires": [
+            [
+                "cd96001a.ba702"
+            ]
+        ]
+    }
+]
